@@ -12,7 +12,6 @@ public class Building : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject == gameObject)
             {
                 buildingCanvas.gameObject.SetActive(true);

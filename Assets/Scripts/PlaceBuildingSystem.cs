@@ -45,6 +45,7 @@ public class PlaceBuildingSystem : MonoBehaviour
         if (Input.GetMouseButton(0) && placingVisual.transform.position != placingVisualLimboPosition)
         {
             Instantiate(gameplayPrefab, placingVisual.transform.position, placingVisual.transform.rotation, buildingsContainer);
+            GameEvents.instance.PlaceBuilding();
             enabled = false;
         }
 
