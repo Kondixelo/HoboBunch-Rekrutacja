@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameResource
 {
     public int amount = 0;

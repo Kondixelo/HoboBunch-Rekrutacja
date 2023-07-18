@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -7,9 +5,11 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameResourceSO inventoryItem;
 
     public GameObject backpack;
+    private PlayerInventoryView playerInvView;
     private void Start()
     {
         inventoryItem = null;
+        playerInvView = GetComponent<PlayerInventoryView>();
     }
 
     public bool AddItemInventory(GameResourceSO resource)
@@ -17,6 +17,7 @@ public class PlayerInventory : MonoBehaviour
         if (inventoryItem == null)
         {
             inventoryItem = resource;
+            playerInvView.UpdateView(resource, 1);
             return true;
         }
         else
@@ -29,6 +30,7 @@ public class PlayerInventory : MonoBehaviour
     {
         GameResourceSO tmp = inventoryItem;
         inventoryItem = null;
+        playerInvView.UpdateView();
         return tmp;
     }
 
