@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    public Canvas buildingCanvas;
+    [SerializeField] private Canvas buildingCanvas;
     void Update()
     {
         RaycastHit hit;

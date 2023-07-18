@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-
         groundMask = LayerMask.NameToLayer("Ground");
     }
 
@@ -35,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveTo(Vector3 destination)
     {
-        Debug.Log("RUSZ SIE");
         playerAgent.SetDestination(destination);
     }
 }

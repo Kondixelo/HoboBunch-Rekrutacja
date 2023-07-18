@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GameResourcesList : MonoBehaviour
 {
-    [SerializeField]
+    [HideInInspector]
     public List<GameResource> resources;
-    [SerializeField]
     public List<GameResourceSO> resourceSOs;
 
-    [SerializeField]
     List<GameResourceView> resourceViews;
     [SerializeField]
     GameResourceView resourceViewPrefab;
@@ -17,7 +15,6 @@ public class GameResourcesList : MonoBehaviour
     [SerializeField]
     Transform resourceViewsParent;
 
-    // Start is called before the first frame update
     void Start()
     {
         resources = new List<GameResource>();
@@ -46,12 +43,10 @@ public class GameResourcesList : MonoBehaviour
 
     public void Remove(GameResourceSO resourceSO, int amount)
     {
-        Debug.LogWarning("SPRAWDZAM REMOVE");
         var resource = resources.Find((x) => x.resourceSO == resourceSO);
 
         if (resource != null)
         {
-            Debug.LogWarning("ISTNIEJE REMOVE");
             resource.amount -= amount;
             var resourceView = resourceViews.Find((x) => x.resourceSO == resourceSO);
             resourceView.UpdateAmount(resource.amount);
@@ -60,16 +55,12 @@ public class GameResourcesList : MonoBehaviour
 
     public bool CheckResource(GameResourceSO resourceSO, int amount)
     {
-        Debug.LogWarning("SPRWDZAM: " + resourceSO.name);
         var resource = resources.Find((x) => x.resourceSO == resourceSO);
 
-        if(resource != null)
+        if (resource != null)
         {
-            Debug.Log(resource.amount);
-            Debug.LogWarning("ISTNIEJE" );
             if (resource.amount > 0 && amount <= resource.amount)
             {
-                Debug.LogWarning("WYSTARCZAJACA ILOSC");
                 Remove(resourceSO, amount);
                 return true;
             }

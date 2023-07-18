@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingText : MonoBehaviour
 {
-    public float floatingSpeed = 5f;
-    public float timeToDestroy = 1.2f;
+    [SerializeField] private float floatingSpeed = 5f;
+    [SerializeField] private float timeToDestroy = 1.2f;
     float startTime;
 
     [SerializeField]
@@ -21,7 +19,6 @@ public class FloatingText : MonoBehaviour
         tmpText.text = text;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + floatingSpeed * Time.deltaTime, transform.position.z);

@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerBuildingInteraction : MonoBehaviour
 {
     [SerializeField] private LayerMask interactiveObjectMask;
     [SerializeField] private int minimumDistanceFromObject;
     private PlayerMovement playerMovement;
-    public GameObject clickedBuilding;
+    private GameObject clickedBuilding;
     private float distanceFromBuilding;
     void Start()
     {
@@ -26,7 +24,6 @@ public class PlayerBuildingInteraction : MonoBehaviour
                 if (hitPoint.transform.gameObject.TryGetComponent<IInteractiveBuilding>(out IInteractiveBuilding interactiveBuilding))
                 {
                     clickedBuilding = hitPoint.transform.gameObject;
-                    Debug.Log("BUDYNEK INTERAKTYWNY");
                     StopAllCoroutines();
                     StartCoroutine(InteractBuilding(interactiveBuilding));
                 }
@@ -52,7 +49,6 @@ public class PlayerBuildingInteraction : MonoBehaviour
             playerMovement.MoveTo(clickedBuilding.transform.position);
         }
         yield return new WaitUntil(() => distanceFromBuilding <= minimumDistanceFromObject);
-        Debug.LogWarning("Interact Building");
 
         clickedBuilding = null;
         if(triggerBuilding != null)
@@ -64,5 +60,4 @@ public class PlayerBuildingInteraction : MonoBehaviour
             StartCoroutine(objectToInspect.BuildingInteraction(gameObject));
         }
     }
-
 }

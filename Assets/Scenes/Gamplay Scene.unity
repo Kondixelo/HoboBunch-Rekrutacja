@@ -1594,7 +1594,6 @@ GameObject:
   - component: {fileID: 1993904585}
   - component: {fileID: 1993904584}
   - component: {fileID: 1993904583}
-  - component: {fileID: 1993904582}
   - component: {fileID: 1993904581}
   - component: {fileID: 1993904580}
   m_Layer: 0
@@ -1642,21 +1641,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   minimumDistanceFromObject: 3
-  clickedBuilding: {fileID: 0}
---- !u!114 &1993904582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993904579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6fc3fd24480ce40b5476336ec3d7b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInt: {fileID: 1993904581}
-  playerMov: {fileID: 1993904583}
 --- !u!114 &1993904583
 MonoBehaviour:
   m_ObjectHideFlags: 0

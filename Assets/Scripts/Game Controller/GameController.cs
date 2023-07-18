@@ -12,21 +12,10 @@ public class GameController : MonoBehaviour
         UpdateNavigationSurface();
     }
 
-    private void OnEnable()
-    {
-
-    }
     private void OnDisable()
     {
         GameEvents.instance.OnPlaceBuilding -= UpdateNavigationSurface;
     }
-
-    void Update()
-    {
-        
-    }
-
-
 
     public void UpdateNavigationSurface()
     {
