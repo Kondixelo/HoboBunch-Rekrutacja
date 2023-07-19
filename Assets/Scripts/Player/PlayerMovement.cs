@@ -30,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if(playerAgent.velocity.magnitude > 0)
+        {
+            GameEvents.instance.PlayerWalking();
+        }
+        else
+        {
+            GameEvents.instance.PlayerStopWalking();
+        }
     }
 
     public void MoveTo(Vector3 destination)

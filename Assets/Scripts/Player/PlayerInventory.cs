@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private GameResourceSO inventoryItem;
-
-    public GameObject backpack;
+    private GameResourceSO inventoryItem;
     private PlayerInventoryView playerInvView;
     private void Start()
     {
@@ -18,6 +16,7 @@ public class PlayerInventory : MonoBehaviour
         {
             inventoryItem = resource;
             playerInvView.UpdateView(resource, 1);
+            GameEvents.instance.PlayerCarrying();
             return true;
         }
         else
@@ -31,20 +30,12 @@ public class PlayerInventory : MonoBehaviour
         GameResourceSO tmp = inventoryItem;
         inventoryItem = null;
         playerInvView.UpdateView();
+        GameEvents.instance.PlayerStopCarrying();
         return tmp;
     }
 
-    void Update()
-    {
-        if(inventoryItem != null)
-        {
-            backpack.SetActive(true);
-        }
-        else
-        {
-            backpack.SetActive(false);
-        }
-    }
+
+    
 
     public bool CheckInventoryItem(GameResourceSO excpectedItem)
     {

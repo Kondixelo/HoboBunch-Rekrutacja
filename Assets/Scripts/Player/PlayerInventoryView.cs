@@ -13,6 +13,26 @@ public class PlayerInventoryView : MonoBehaviour
     Transform resourceViewsParent;
 
     [SerializeField] private Canvas buildingCanvas;
+
+    [SerializeField] private GameObject carryingBox;
+    private bool canShowBox = false;
+
+    void Start()
+    {
+        GameEvents.instance.OnPlayerCarrying += CarryingBoxAvailable;
+        GameEvents.instance.OnPlayerStopCarrying += CarryingBoxNotAvailable;
+        GameEvents.instance.OnPlayerWalking += ActivateCarryingBox;
+        GameEvents.instance.OnPlayerStopWalking += DeactivateCarryingBox;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.instance.OnPlayerCarrying -= CarryingBoxAvailable;
+        GameEvents.instance.OnPlayerStopCarrying -= CarryingBoxNotAvailable;
+        GameEvents.instance.OnPlayerWalking -= ActivateCarryingBox;
+        GameEvents.instance.OnPlayerStopWalking -= DeactivateCarryingBox;
+    }
+
     void Update()
     {
         RaycastHit hit;
@@ -34,6 +54,30 @@ public class PlayerInventoryView : MonoBehaviour
             buildingCanvas.gameObject.SetActive(false);
         }
     }
+
+    private void ActivateCarryingBox()
+    {
+        if (canShowBox)
+        {
+            carryingBox.SetActive(true);
+        }
+    }
+
+    private void DeactivateCarryingBox()
+    {
+        carryingBox.SetActive(false);
+    }
+
+
+    private void CarryingBoxAvailable()
+    {
+        canShowBox = true;
+    }
+    private void CarryingBoxNotAvailable()
+    {
+        canShowBox = false;
+    }
+
 
     public void UpdateView(GameResourceSO resourceSO, int amount)
     {
