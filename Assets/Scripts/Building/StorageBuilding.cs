@@ -16,7 +16,6 @@ public class StorageBuilding : MonoBehaviour, IInteractiveBuilding
     }
     public IEnumerator BuildingInteraction(GameObject initializingObject, IInteractiveBuilding triggerBuilding = null)
     {
-        yield return null;
         if (initializingObject.TryGetComponent<PlayerInventory>(out PlayerInventory playerInv))
         {
             if (!playerInv.IsInventoryEmpty())
@@ -24,6 +23,7 @@ public class StorageBuilding : MonoBehaviour, IInteractiveBuilding
                 AddResources(playerInv.GetInventoryItem());
             }
         }
+        yield return null;
     }
 
     public GameObject GetGameObject()

@@ -51,37 +51,34 @@ public class ProductionBuilding : MonoBehaviour, IInteractiveBuilding
         floatingText.SetText(resourceSO.resourceName + " +1");
     }
 
+
     public IEnumerator BuildingInteraction(GameObject initializingObject, IInteractiveBuilding triggerBuilding = null)
     {
-        yield return null; 
-        if (initializingObject.TryGetComponent<PlayerInventory>(out PlayerInventory playerInv))
-        {
-            if (playerInv.IsInventoryEmpty())
-            {
-                if (resourcesList.CheckResource(outputResourceSO, 1))
-                {
-                    playerInv.AddItemInventory(outputResourceSO);
-                }
-                else
-                {
-                    ExtractionBuilding nearestExtractionBuilding = ObjectBrowser.instance.FindNearest<ExtractionBuilding>(gameObject);
+        if (!initializingObject.TryGetComponent<PlayerInventory>(out PlayerInventory playerInv))
+            yield break;
 
-                    if (nearestExtractionBuilding != null)
-                    {
-                        PlayerBuildingInteraction playerInt = initializingObject.GetComponent<PlayerBuildingInteraction>();
-                        StartCoroutine(playerInt.InteractBuilding(nearestExtractionBuilding, this));
-                    }
-                }
+        if (playerInv.IsInventoryEmpty())
+        {
+            if (resourcesList.CheckResource(outputResourceSO, 1))
+            {
+                playerInv.AddItemInventory(outputResourceSO);
             }
             else
             {
-                if (playerInv.CheckInventoryItem(inputResourceSO))
+                ExtractionBuilding nearestExtractionBuilding = ObjectBrowser.instance.FindNearest<ExtractionBuilding>(gameObject);
+                if (nearestExtractionBuilding != null)
                 {
-                    AddResources(playerInv.GetInventoryItem());
+                    PlayerBuildingInteraction playerInt = initializingObject.GetComponent<PlayerBuildingInteraction>();
+                    StartCoroutine(playerInt.InteractBuilding(nearestExtractionBuilding, this));
                 }
             }
         }
+        else if (playerInv.CheckInventoryItem(inputResourceSO))
+        {
+            AddResources(playerInv.GetInventoryItem());
+        }
     }
+
     public GameObject GetGameObject()
     {
         return gameObject;

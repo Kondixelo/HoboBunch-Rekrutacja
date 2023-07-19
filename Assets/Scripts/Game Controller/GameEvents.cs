@@ -9,14 +9,14 @@ public class GameEvents : MonoBehaviour
     {
         instance = this;
     }
-    
+
+    // General events
     public event Action OnGameStart;
     public event Action OnPlaceBuilding;
 
-    //Player
+    // Player events
     public event Action OnPlayerWalking;
     public event Action OnPlayerStopWalking;
-
     public event Action OnPlayerCarrying;
     public event Action OnPlayerStopCarrying;
 

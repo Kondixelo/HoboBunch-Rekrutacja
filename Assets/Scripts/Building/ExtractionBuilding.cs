@@ -36,19 +36,15 @@ public class ExtractionBuilding : MonoBehaviour, IInteractiveBuilding
 
     public IEnumerator BuildingInteraction(GameObject initializingObject, IInteractiveBuilding triggerBuilding = null)
     {
-        if (initializingObject.TryGetComponent<PlayerInventory>(out PlayerInventory playerInv))
+        if (initializingObject.TryGetComponent<PlayerInventory>(out PlayerInventory playerInv) && playerInv.IsInventoryEmpty())
         {
-            if (playerInv.IsInventoryEmpty())
+            yield return new WaitUntil(() => resourcesList.CheckResource(resourceSO, 1));
+            playerInv.AddItemInventory(resourceSO);
+
+            if (triggerBuilding != null)
             {
-                yield return new WaitUntil(() => resourcesList.CheckResource(resourceSO, 1));
-
-                playerInv.AddItemInventory(resourceSO);
-
-                if (triggerBuilding != null)
-                {
-                    PlayerBuildingInteraction playerInt = initializingObject.GetComponent<PlayerBuildingInteraction>();
-                    StartCoroutine(playerInt.InteractBuilding(triggerBuilding, this));
-                }
+                PlayerBuildingInteraction playerInt = initializingObject.GetComponent<PlayerBuildingInteraction>();
+                StartCoroutine(playerInt.InteractBuilding(triggerBuilding, this));
             }
         }
     }
